@@ -1,0 +1,21 @@
+.pizza-items{
+    /* border: 1px solid black; */
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 80%;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.filter-container{
+    display: flex;
+    justify-content: center;
+    /* margin: 10px 0px; */
+}
