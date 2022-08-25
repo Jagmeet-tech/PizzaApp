@@ -73,12 +73,12 @@ function Cards({searchText,setSearchText}) {
       if(rating){
         if(rating === "Increase"){
           let filter = [...pizza];
-          filter.sort((a,b) => Math.round(a.rating) - Math.round(b.rating));
+          filter.sort((a,b) => Math.ceil(a.rating) - Math.ceil(b.rating));
           console.log(filter);
           setFilterPizza([...filter]);
         }else if(rating === "Decrease"){
             let filter = [...pizza];
-            filter.sort((a,b) => Math.round(b.rating) - Math.round(a.rating));
+            filter.sort((a,b) => Math.ceil(b.rating) - Math.ceil(a.rating));
             setFilterPizza([...filter]);
         }
     }else{

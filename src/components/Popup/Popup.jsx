@@ -17,10 +17,10 @@ import { setItem } from '../../redux/actions/actions';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
   '& .MuiDialogActions-root': {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0),
   },
 }));
 
@@ -28,7 +28,7 @@ const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props;
 
   return (
-    <DialogTitle sx={{m: 0, p: 2 }} {...other}>
+    <DialogTitle sx={{m: 0, p: 1 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -82,11 +82,17 @@ export default function Popup({popup,setPopup,item}) {
         <DialogActions>
           <Button autoFocus onClick={()=>{
             let {toppings,size} = details;
+            if(toppings.length == 0){
+              toppings = ["Onion"]
+            }
+            if(!size)
+              size = "Regular";
+              
             let obj = {...item,toppings:toppings,size:size};
             dispatch(setItem(obj))
             handleClose()
           }}>
-            Submit
+            ADD
           </Button>
         </DialogActions>
       </BootstrapDialog>
