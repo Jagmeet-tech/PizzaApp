@@ -11,4 +11,11 @@ const getItem  = ()=>{
     }
 }
 
-export {setItem,getItem};
+const removeItem = (obj)=>{
+    return {
+        type : "REMOVE_ITEM",
+        payload:obj
+    }
+}
+
+export {setItem,getItem,removeItem};

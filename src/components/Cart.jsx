@@ -1,15 +1,17 @@
 import { useSelect } from '@mui/base';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Rating from '@mui/material/Rating';
+import { removeItem } from '../redux/actions/actions';
 
 
 function Cart() {
   let finalPizza = useSelector(state => state);
+  let dispatch = useDispatch();
   let [totalprice,setTotalPrice] = useState(0);
   console.log(finalPizza);
 
@@ -32,7 +34,13 @@ function Cart() {
             <p>Total Billing : Rs {totalprice}</p>
           </div>
           <div className='pizza-items'>
-            {
+          
+            {!finalPizza ?(
+              <div style = {{marginBottom:"20px"}}>
+                  No Foof Items in the Cart!!!
+              </div>
+            ):
+            (
               finalPizza?.map((item)=>{
                   return(
                     <Card style={{ width: '20rem',margin : "2rem" }}>
@@ -44,12 +52,13 @@ function Cart() {
                         <Card.Text>Price : Rs {item.price}</Card.Text>
                         <Card.Text>Type : {item.isVeg ? "Vegetarian" :"Non-Vegetarian" }</Card.Text>
                         <Card.Text>Size : {item.size}</Card.Text>
-                        <Card.Text>Toppings : {item.toppings}</Card.Text>
-                        <Button variant="primary" mx = "2px">Payment</Button>
+                        <Card.Text>Toppings : {item.toppings +" "}</Card.Text>
+                        <Button variant="primary" mx = "2px" onClick={() =>dispatch(removeItem(item))}>Remove</Button>
                       </Card.Body>
                   </Card>
                   )
             })
+            )
             }
             </div>
           <Footer/>

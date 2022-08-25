@@ -5,8 +5,9 @@ import "./RadioButton.css";
 
 function RadioButton({item,details,setDetails}) {
 
-    let [size,setSize] = useState("Regular");
+    let [size,setSize] = useState("");
     let dispatch = useDispatch();
+    let data = item.size[0].items;
 
     let handleChange= (e)=>{
         setSize(e.target.value);
@@ -21,13 +22,15 @@ function RadioButton({item,details,setDetails}) {
 
   return (
     <div className='radio-container'>
-        <p>Select your Sizes:</p>
-        <input type="radio" name="size" onClick = {handleChange} value="Regular"/>
-        <label for="html">Regular</label><br/>
-        <input type="radio" name="size" value="Medium"  onClick = {handleChange}/>
-        <label for="css">Medium</label><br/>
-        <input type="radio" name="size" value="Large"  onClick = {handleChange}/>
-        <label for="javascript">Large</label>
+        <p className='category'>Select your Sizes:</p>
+        {
+          data.map((obj)=>(
+            <div>
+            <input type="radio"  className = "radio" name="size" onClick = {handleChange} value={obj.size}/>
+            <label>{obj.size}</label><br/>
+            </div>
+          ))
+        }
     </div>
   )
 }

@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import RadioButton from '../RadioButton/RadioButton';
 import Checkbox from '../Checkbox/Checkbox';
+import "./Popup.css";
 import { useDispatch } from 'react-redux';
 import { setItem } from '../../redux/actions/actions';
 
@@ -71,6 +72,7 @@ export default function Popup({popup,setPopup,item}) {
         open={popup}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+          <img className = "logo" src='https://acegif.com/wp-content/gifs/pizza-64.gif'/>
           Mention the Pizza Details!!!
         </BootstrapDialogTitle>
         <DialogContent dividers>

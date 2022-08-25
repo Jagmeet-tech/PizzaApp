@@ -6,10 +6,13 @@ import "./Cards.css";
 import Rating from '@mui/material/Rating';
 import Filter from '../Filter/Filter';
 import Popup from '../Popup/Popup';
+import { selectClasses } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 // import getPizzaService from '../../services/getPizzaService';
 
-function Cards() {
+function Cards({searchText,setSearchText}) {
+    let allSelectedPizza = useSelector(state=>state);
     let [selectedPizza,setSelectedPizza] = useState({});
     let [pizza,setPizza] = useState([]);
     let [popup,setPopup] = useState(false);
@@ -17,8 +20,7 @@ function Cards() {
     let [price,setPrice] = useState("");
     let [rating,setRating] = useState("");
     let [filterPizza,setFilterPizza] = useState([]); //for filter
-    
-
+  
     useEffect(()=>{
         axios.get("https://run.mocky.io/v3/ec196a02-aaf4-4c91-8f54-21e72f241b68").then((res)=>{
           console.log(res);
@@ -84,11 +86,28 @@ function Cards() {
     }
     },[rating])
 
+    useEffect(()=>{
+      if(!searchText){
+        setFilterPizza([...pizza]);
+      }else{
+        let newArr = pizza.filter((obj)=>{
+          let str = obj.name.toLowerCase();
+          return str.includes(searchText.toLowerCase());
+        })
+        setFilterPizza([...newArr]);
+      }
+    },[searchText])
+
     let handleButton = (item)=>{
       console.log(popup);
       setSelectedPizza(item);
       setPopup(!popup);
     }
+    
+    let handleRemove = (item)=>{
+      setSelectedPizza({});
+    }
+    
     console.log(popup);
   return (
     <>
@@ -110,7 +129,7 @@ function Cards() {
                 <Card.Text>Rating : <Rating name="half-rating-read" defaultValue={item.rating} precision={0.5} readOnly /></Card.Text>
                 <Card.Text>Price : Rs {item.price}</Card.Text>
                 <Card.Text>Type : {item.isVeg ? "Vegetarian" :"Non-Vegetarian" }</Card.Text>
-                <Button variant="primary" mx = "2px" onClick={()=>{handleButton(item)}}>+Add</Button>
+                <Button variant="primary" style= {{marginRight:"10px"}} onClick={()=>{handleButton(item)}}>Add +</Button>
               </Card.Body>
           </Card>
           )

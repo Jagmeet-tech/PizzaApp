@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useDispatch,useSelector} from "react-redux";
 import { setItem } from '../../redux/actions/actions';
+import "./Checkbox.css"
 
 function Checkbox({item,details,setDetails}) {
 
@@ -32,14 +33,14 @@ function Checkbox({item,details,setDetails}) {
 
   return (
 
-    <div>
-     <p>Select your Toppings:</p>
+    <div className='checkbox-container'>
+     <p className='category'>Select your Toppings:</p>
         {
             data.map((obj)=>(
-                <>
-                    <input type="checkbox" value={obj.name} onClick = {handleChange}/>  
+                <div>
+                    <input type="checkbox" className='checkbox' value={obj.name} onClick = {handleChange} required/>  
                     <label>{obj.name}</label><br/>    
-                </>
+                </div>
             ))
         }
     </div>

@@ -4,7 +4,8 @@ import "./Footer.css";
 function Footer() {
   return (
     <div className='footer'>
-        <p>Website Made by Jagmeet Singh.</p>
+          <h6>Developer : Jagmeet Singh</h6>
+          <h6>Link :<a className = "link" href="https://www.linkedin.com/in/jagmeet-singh-835335202/">Contact on Linkdin</a></h6>
     </div>
   )
 }
